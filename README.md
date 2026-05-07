@@ -1,5 +1,3 @@
-# xct-defect-detection
-
 # XCT Defect Detection Using CBAM Attention
 
 ## Introduction
