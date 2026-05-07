@@ -49,26 +49,15 @@ code/models/
 # =========================
 # Dataset files
 # =========================
-data/*
-!data/README.md
-!data/.gitkeep
+
 
 # =========================
 # Results and generated outputs
 # =========================
-results/*
-!results/README.md
-!results/.gitkeep
+
 
 # Keep folder structure if needed
-results/figures/*
-!results/figures/.gitkeep
 
-results/tables/*
-!results/tables/.gitkeep
-
-results/logs/*
-!results/logs/.gitkeep
 
 # =========================
 # Logs
