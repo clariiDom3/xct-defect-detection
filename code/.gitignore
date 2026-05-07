@@ -20,7 +20,7 @@ venv/
 env/
 ENV/
 
-
+.gitignore
 
 # =========================
 # Jupyter Notebook checkpoints
