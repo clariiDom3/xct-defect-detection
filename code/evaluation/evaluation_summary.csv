@@ -1,0 +1,3 @@
+class,IoU_mean,IoU_std,Dice_mean,Dice_std,Precision_mean,Precision_std,Recall_mean,Recall_std,F1_mean,F1_std
+sample,0.9566,0.1221,0.9732,0.0801,0.9610,0.1229,0.9952,0.0014,0.9732,0.0801
+pores,0.8434,0.0562,0.9141,0.0338,0.9219,0.0236,0.9074,0.0513,0.9141,0.0338

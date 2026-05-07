@@ -1,0 +1,163 @@
+==============================================================
+  SETUP INSTRUCTIONS — XCT CBAM Segmentation
+  Run everything in: Anaconda Prompt
+==============================================================
+
+--------------------------------------------------------------
+STEP 1 — Create / activate your conda environment
+--------------------------------------------------------------
+
+  conda activate XCT
+
+  If the environment doesn't exist yet:
+
+    conda create -n XCT python=3.10 -y
+    conda activate XCT
+
+
+--------------------------------------------------------------
+STEP 2 — Install PyTorch (with CUDA if you have a GPU)
+--------------------------------------------------------------
+
+  Check your CUDA version first:
+    nvidia-smi
+
+  CUDA 11.8 (most common):
+    conda install pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvidia -y
+
+  CUDA 12.1:
+    conda install pytorch torchvision torchaudio pytorch-cuda=12.1 -c pytorch -c nvidia -y
+
+  CPU only (no GPU):
+    conda install pytorch torchvision torchaudio cpuonly -c pytorch -y
+
+
+--------------------------------------------------------------
+STEP 3 — Install remaining dependencies
+--------------------------------------------------------------
+
+  pip install opencv-python scikit-image numpy pandas tqdm matplotlib
+
+
+--------------------------------------------------------------
+STEP 4 — Navigate to the CBAM folder
+--------------------------------------------------------------
+
+  cd "C:\Users\Aorus\OneDrive\Desktop\Research\XCT data defects detection\DL\CBAM"
+
+
+--------------------------------------------------------------
+STEP 5 — Clone the official CBAM repository
+--------------------------------------------------------------
+
+  git clone https://github.com/Jongchan/attention-module.git
+
+  This creates:
+    DL/CBAM/attention-module/
+      MODELS/
+        cbam.py     <- the file we import directly
+        bam.py
+      ...
+
+  Verify it worked:
+    dir attention-module\MODELS
+
+
+--------------------------------------------------------------
+STEP 6 — Copy your project files into DL/CBAM/
+--------------------------------------------------------------
+
+  Copy these files into DL/CBAM/ (same folder as this README):
+    config_dl.py
+    model.py
+    dataset.py
+    train.py
+    predict.py
+    evaluate.py
+
+  Your folder should look like:
+    DL/CBAM/
+      attention-module/     <- cloned repo
+      config_dl.py
+      model.py
+      dataset.py
+      train.py
+      predict.py
+      evaluate.py
+      SETUP.txt             <- this file
+
+
+--------------------------------------------------------------
+STEP 7 — Verify everything works
+--------------------------------------------------------------
+
+  python model.py
+
+  Expected output:
+    Device: cuda   (or cpu)
+    Stage 1 | input: (2, 1, 256, 256) -> output: (2, 1, 256, 256)  parameters: ~X,XXX,XXX
+    Stage 2 | input: (2, 2, 256, 256) -> output: (2, 1, 256, 256)  parameters: ~X,XXX,XXX
+
+
+--------------------------------------------------------------
+STEP 8 — Run the pipeline
+--------------------------------------------------------------
+
+  Make sure you have already run (in the V2 folder):
+    python generate_masks_v2.py --vis
+    python 01_preprocessing_v2.py
+
+  Then from DL/CBAM/:
+
+    # Train both stages (recommended first run)
+    python train.py
+
+    # Train only Stage 1 (sample detection)
+    python train.py --stage 1
+
+    # Train only Stage 2 (pore detection, requires Stage 1 checkpoint)
+    python train.py --stage 2
+
+    # Run inference on all polar images
+    python predict.py
+
+    # Evaluate predictions against GT masks
+    python evaluate.py
+
+
+--------------------------------------------------------------
+FOLDER STRUCTURE AFTER SETUP
+--------------------------------------------------------------
+
+  DL/
+    CBAM/                          <- THIS model (ResNet+CBAM segmentation)
+      attention-module/            <- official Jongchan repo
+      checkpoints/
+        stage1_best.pth            <- saved after train.py
+        stage2_best.pth
+      predictions/
+        sample/
+        pores/
+      evaluation/
+      vis/
+      logs/
+
+    CBAM_UNet/                     <- future test (U-Net+CBAM hybrid)
+      [files moved there separately]
+
+
+--------------------------------------------------------------
+NOTES
+--------------------------------------------------------------
+
+  - All paths are set in config_dl.py — only edit BASE_V2 if you
+    move the project to a different drive.
+
+  - If git is not installed:
+    conda install git -y
+    then repeat STEP 5.
+
+  - If you see "CUDA out of memory": reduce BATCH_SIZE in config_dl.py
+    (try 4, then 2).
+
+==============================================================
