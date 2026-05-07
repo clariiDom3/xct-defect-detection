@@ -1,0 +1,96 @@
+# =========================
+# macOS system files
+# =========================
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# =========================
+# Python cache files
+# =========================
+__pycache__/
+*.py[cod]
+*$py.class
+
+# =========================
+# Virtual environments
+# =========================
+venv/
+.venv/
+env/
+ENV/
+
+# =========================
+# Jupyter Notebook checkpoints
+# =========================
+.ipynb_checkpoints/
+
+# =========================
+# Environment variables
+# =========================
+.env
+.env.local
+
+# =========================
+# Large model/checkpoint files
+# =========================
+*.pth
+*.pt
+*.ckpt
+*.h5
+*.onnx
+
+# Optional checkpoint folders
+checkpoints/
+code/checkpoints/
+models/
+code/models/
+
+# =========================
+# Dataset files
+# =========================
+data/*
+!data/README.md
+!data/.gitkeep
+
+# =========================
+# Results and generated outputs
+# =========================
+results/*
+!results/README.md
+!results/.gitkeep
+
+# Keep folder structure if needed
+results/figures/*
+!results/figures/.gitkeep
+
+results/tables/*
+!results/tables/.gitkeep
+
+results/logs/*
+!results/logs/.gitkeep
+
+# =========================
+# Logs
+# =========================
+*.log
+logs/
+
+# =========================
+# IDE/editor files
+# =========================
+.vscode/
+.idea/
+
+# =========================
+# Temporary files
+# =========================
+*.tmp
+*.temp
+*.bak
+*.swp
+
+# =========================
+# OS/hidden files
+# =========================
+Thumbs.db
